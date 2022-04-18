@@ -2,16 +2,17 @@ import { Box, Stack, Image, Text } from "@chakra-ui/react";
 import { memo, VFC } from "react";
 
 type Props = {
-  userName: string;
-  fullName: string
-};
+    image: string;
+    districtName: string;
+    hikiyamaName: string;
+}
 
 export const UserCard: VFC<Props> = memo((props) => {
-  const {userName, fullName } = props;
+  const { image, districtName, hikiyamaName } = props;
   return (
     <Box 
-        w="260px" 
-        h="260px" 
+        w="300px" 
+        h="420px" 
         bg="white" 
         borderRadius="10px" 
         shadow="md" 
@@ -19,15 +20,14 @@ export const UserCard: VFC<Props> = memo((props) => {
         _hover={{cursor:"pointer", opacity:0.8}}>
             <Stack textAlign="center">
                 <Image 
-                    borderRadius="full"
-                    boxSize="160px"
-                    src="/akajishi.jpg"
-                    alt="images"
+                    boxSize="320px"
+                    src={image}
+                    alt={hikiyamaName}
                     m="auto"
                 />
-                <Text fontSize="lg">{userName}</Text>
-                <Text fontSize="lg">{fullName}</Text>
+                <Text fontSize="lg">{districtName}</Text>
+                <Text fontSize="lg">{hikiyamaName}</Text>
             </Stack>
-  </Box>
+    </Box>
   );
 });

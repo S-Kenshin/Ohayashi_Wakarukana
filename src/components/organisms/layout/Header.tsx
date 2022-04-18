@@ -26,7 +26,7 @@ export const Header: VFC = memo(() => {
           onClick={onClickHome}
         >
           <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
-            ユーザー管理アプリ
+            唐津くんちのお囃子わかるかな
           </Heading>
         </Flex>
         <Flex
