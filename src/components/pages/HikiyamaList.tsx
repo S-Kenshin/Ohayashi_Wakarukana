@@ -9,7 +9,7 @@ import { UserCard } from "../organisms/hikiyama/HikiyamaCard";
 export const HikiyamaList: VFC = memo(() => {
   return (
     <>
-        <Wrap p={{ base: 4, md: 10 }}>
+        <Wrap p={{ base: 4, md: 10 }} justify='center'>
                 <WrapItem  mx="auto">
                     <UserCard 
                         image="/akajishi.jpg"

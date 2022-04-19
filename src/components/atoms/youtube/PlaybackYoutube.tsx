@@ -1,9 +1,14 @@
 import { Button } from '@chakra-ui/react';
-import React from 'react';
+import React, { memo, VFC } from 'react';
 import ReactPlayer from 'react-player';
 import { useState } from 'react';
 
-export const PlaybackYoutube = () => {
+type Props = {
+    url: string;
+};
+
+export const PlaybackYoutube: VFC<Props> = memo((props) => {
+    const {url} = props;
     const [playing, setPlaying] = useState(false);
     return (
         <>
@@ -11,7 +16,7 @@ export const PlaybackYoutube = () => {
                 style={{display:"none"}}
                 progressInterval={200}
                 controls={false}
-                url="https://www.youtube.com/watch?v=FyCHB8HTEaA"
+                url={url}
                 playing={playing}
                 config={{
                     file: {
@@ -26,5 +31,5 @@ export const PlaybackYoutube = () => {
                 <Button onClick={()=>setPlaying(true)} colorScheme="blue">Play</Button>
             )}
         </>
-    )
-}
+    );
+});
