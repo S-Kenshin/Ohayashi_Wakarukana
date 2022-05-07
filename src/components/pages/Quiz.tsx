@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Center, Stack, VStack } from "@chakra-ui/react";
 import { memo, useEffect, useState, VFC } from "react";
 import { CorrectAnswer } from "../atoms/results/CorrectAnswer";
 import { FalseAnswer } from "../atoms/results/FalseAnswer";
@@ -182,7 +182,6 @@ export const Quiz: VFC = memo(() => {
 		},
 	];
 
-	const [qList, setQList] = useState(questions);
     const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
@@ -197,53 +196,73 @@ export const Quiz: VFC = memo(() => {
 				setResultAnswer(false);
 			}
 
+
+	};
+
+	const handleNextButtonClick = () => {
+		console.log("YES")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true);
 		}
-	};
+	}
     return (
         <>
-          <div>
-          {showScore ? (
-				<div className='score-section'>
-					You scored {score} out of {questions.length}
-				</div>
-			) : (
-				<>
-					<div className='question-section'>
-						<div className='question-count'>
-							<span>Question {currentQuestion + 1}</span>/{questions.length}
+			<Center>
+				<div>
+				{showScore ? (
+						<div className='score-section'>
+							You scored {score} out of {questions.length}
 						</div>
-						<div className='question-text'>{questions[currentQuestion].questionText}</div>
-                        <PlaybackYoutube url={questions[currentQuestion].url} />
-					</div>
-					<div className='answer-section'>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<Button 
-								colorScheme="linkedin" 
-								onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
-							>
-								{answerOption.answerText}
-							</Button>
-						))}
-					</div>
-					<div>
-						{(() => {
-							if (resultAnswer === true) {
-								return <CorrectAnswer />
-							} else if (resultAnswer === false) {
-								return <FalseAnswer />
-							} else if (resultAnswer === null) {
-								return ;
-							}
-						})()}
-					</div>
-				</>
-			)}
-		  </div>
+					) : (
+						<>
+							<div className='question-section'>
+								<VStack h={50} justify='center'>
+								<div className='question-count'>
+									<span>Question {currentQuestion + 1}</span>/{questions.length}
+								</div>
+								</VStack>
+								<VStack h={40} justify='center'>
+									<div className='question-text'>
+										{questions[currentQuestion].questionText}
+									</div>
+								</VStack>
+								<VStack h={10} justify='center'>
+								{(() => {
+									if (resultAnswer === true) {
+										return <CorrectAnswer />
+									} else if (resultAnswer === false) {
+										return <FalseAnswer />
+									} else if (resultAnswer === null) {
+										return ;
+									}
+								})()}
+								</VStack>
+								<VStack h={150} justify='center'>
+									<PlaybackYoutube url={questions[currentQuestion].url} />
+								</VStack>
+							</div>
+							<div className='answer-section'>
+								<Stack>
+									{questions[currentQuestion].answerOptions.map((answerOption) => (
+										<Button 
+											colorScheme="linkedin" 
+											onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+										>
+											{answerOption.answerText}
+										</Button>
+								))}
+								</Stack>
+							</div>
+							<div>
+								<Button onClick={() => handleNextButtonClick}>次へ</Button>
+							</div>
+						</>
+					)}
+				</div>
+			</Center>
         </>
     )
 })

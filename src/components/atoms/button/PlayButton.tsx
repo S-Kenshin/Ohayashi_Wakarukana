@@ -5,7 +5,11 @@ import { memo, VFC } from 'react';
 export const PlayButton: VFC = memo(() => {
     return (
         <>
-            <Button colorScheme="teal">Play</Button>
+            <Button 
+                colorScheme="teal"
+            >
+                Play
+            </Button>
         </>
     )
 })
