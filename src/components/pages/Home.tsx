@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Center } from "@chakra-ui/react";
 import { memo, useCallback, VFC } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -8,8 +8,10 @@ export const Home: VFC = memo(() => {
     const onClickHikiyamaList = useCallback(() => history.push("/home/hikiyama_list"), []);
     return (
         <>
-            <Button colorScheme="blue" onClick={onClickQuizStart}>クイズスタート</Button>
-            <Button colorScheme="green" onClick={onClickHikiyamaList}>曳山一覧</Button>
+            <Center>
+                <Button colorScheme="blue" onClick={onClickQuizStart}>クイズスタート</Button>
+                <Button colorScheme="green" onClick={onClickHikiyamaList}>曳山一覧</Button>
+            </Center>
         </>
     )
 })

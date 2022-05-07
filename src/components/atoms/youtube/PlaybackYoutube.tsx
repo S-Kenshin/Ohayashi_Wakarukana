@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import React, { memo, VFC } from 'react';
+import React, { memo, useEffect, VFC } from 'react';
 import ReactPlayer from 'react-player';
 import { useState } from 'react';
 
@@ -10,6 +10,7 @@ type Props = {
 export const PlaybackYoutube: VFC<Props> = memo((props) => {
     const {url} = props;
     const [playing, setPlaying] = useState(false);
+
     return (
         <>
             <ReactPlayer

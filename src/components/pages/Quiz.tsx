@@ -1,8 +1,9 @@
 import { Button } from "@chakra-ui/react";
-import { memo, useState, VFC } from "react";
-import { SubmitButton } from "../atoms/button/SubumitButton";
-import { SelectAnswer } from "../atoms/select/SelectAnswer";
+import { memo, useEffect, useState, VFC } from "react";
+import { CorrectAnswer } from "../atoms/results/CorrectAnswer";
+import { FalseAnswer } from "../atoms/results/FalseAnswer";
 import { PlaybackYoutube } from "../atoms/youtube/PlaybackYoutube";
+
 
 
 export const Quiz: VFC = memo(() => {
@@ -13,7 +14,7 @@ export const Quiz: VFC = memo(() => {
     const questions = [
 		{
 			questionText: 'どの曳山でしょう',
-            answer: "亀と浦島太郎",
+            correct: "亀と浦島太郎",
             image: "",
             url: "https://www.youtube.com/watch?v=O082i6sfCRU",
 			answerOptions: [
@@ -25,7 +26,7 @@ export const Quiz: VFC = memo(() => {
 		},
 		{
 			questionText: 'どの曳山でしょう?',
-            answer: "鳳凰丸",
+            correct: "鳳凰丸",
             image: "",
             url: "https://www.youtube.com/watch?v=EdSMDmgZXts",
 			answerOptions: [
@@ -37,7 +38,7 @@ export const Quiz: VFC = memo(() => {
 		},
 		{
 			questionText: 'どの曳山でしょう?',
-            answer: "武田信玄の兜",
+            correct: "武田信玄の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=43rRhvIYpRo",
 			answerOptions: [
@@ -49,7 +50,7 @@ export const Quiz: VFC = memo(() => {
 		},
 		{
 			questionText: 'どの曳山でしょう?',
-            answer: "青獅子",
+            correct: "青獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=blS7C5hxd4U",
 			answerOptions: [
@@ -61,7 +62,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "七宝丸",
+            correct: "七宝丸",
             image: "",
             url: "https://www.youtube.com/watch?v=FacJYh2Ds5E",
 			answerOptions: [
@@ -73,7 +74,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "源義経の兜",
+            correct: "源義経の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=YaVOWuPLYK0",
 			answerOptions: [
@@ -85,7 +86,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "鯱",
+            correct: "鯱",
             image: "",
             url: "https://www.youtube.com/watch?v=9R9DQtn9cYI&t=1s",
 			answerOptions: [
@@ -97,7 +98,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "珠取獅子",
+            correct: "珠取獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=QvrzMgqtNEU",
 			answerOptions: [
@@ -109,7 +110,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "金獅子",
+            correct: "金獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=SX-QSAnK0IM",
 			answerOptions: [
@@ -121,7 +122,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "上杉謙信の兜",
+            correct: "上杉謙信の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=eS18mHXnyPY",
 			answerOptions: [
@@ -133,19 +134,19 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "鯛山",
+            correct: "鯛山",
             image: "",
             url: "https://www.youtube.com/watch?v=MkCk2Pv8ybE",
 			answerOptions: [
 				{ answerText: '鯱', isCorrect: false },
 				{ answerText: '亀と浦島太郎', isCorrect: false },
 				{ answerText: '赤獅子', isCorrect: false },
-				{ answerText: '鯛山', isCorrect: true },
+				{ answerText: '鯛', isCorrect: true },
 			],
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "飛龍",
+            correct: "飛龍",
             image: "",
             url: "https://www.youtube.com/watch?v=fMq2ZIrLoPY",
 			answerOptions: [
@@ -157,7 +158,7 @@ export const Quiz: VFC = memo(() => {
 		},
         {
 			questionText: 'どの曳山でしょう?',
-            answer: "酒呑童子と源頼光",
+            correct: "酒呑童子と源頼光",
             image: "",
             url: "https://www.youtube.com/watch?v=x3Lgv2gNPEk",
 			answerOptions: [
@@ -167,16 +168,34 @@ export const Quiz: VFC = memo(() => {
 				{ answerText: '金獅子', isCorrect: false },
 			],
 		},
+		{
+			questionText: 'どの曳山でしょう?',
+            correct: "赤獅子",
+            image: "",
+            url: "https://www.youtube.com/watch?v=x3Lgv2gNPEk",
+			answerOptions: [
+				{ answerText: '上杉謙信の兜', isCorrect: false },
+				{ answerText: '酒呑童子と源頼光', isCorrect: false },
+				{ answerText: '赤獅子', isCorrect: true },
+				{ answerText: '鯛', isCorrect: false },
+			],
+		},
 	];
 
+	const [qList, setQList] = useState(questions);
     const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
+	const [resultAnswer, setResultAnswer] = useState<boolean | null>(null);
 
-	const handleAnswerOptionClick = (isCorrect: any) => {
-		if (isCorrect) {
-			setScore(score + 1);
-		}
+	const handleAnswerOptionClick = (isCorrect: boolean) => {
+			if (isCorrect === true) 
+			{
+				setScore(score + 1);
+				setResultAnswer(true);
+			} else {
+				setResultAnswer(false);
+			}
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -203,8 +222,24 @@ export const Quiz: VFC = memo(() => {
 					</div>
 					<div className='answer-section'>
 						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<Button colorScheme="linkedin" onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</Button>
+							<Button 
+								colorScheme="linkedin" 
+								onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+							>
+								{answerOption.answerText}
+							</Button>
 						))}
+					</div>
+					<div>
+						{(() => {
+							if (resultAnswer === true) {
+								return <CorrectAnswer />
+							} else if (resultAnswer === false) {
+								return <FalseAnswer />
+							} else if (resultAnswer === null) {
+								return ;
+							}
+						})()}
 					</div>
 				</>
 			)}
