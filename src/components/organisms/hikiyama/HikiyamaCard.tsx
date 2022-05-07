@@ -11,7 +11,7 @@ export const UserCard: VFC<Props> = memo((props) => {
   const { image, districtName, hikiyamaName } = props;
   return (
     <Box 
-        w="300px" 
+        w="280px" 
         h="420px" 
         bg="white" 
         borderRadius="10px" 
