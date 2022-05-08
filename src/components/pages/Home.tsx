@@ -1,4 +1,4 @@
-import { Button, Center } from "@chakra-ui/react";
+import { Button, Center, VStack } from "@chakra-ui/react";
 import { memo, useCallback, VFC } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -9,8 +9,32 @@ export const Home: VFC = memo(() => {
     return (
         <>
             <Center>
-                <Button colorScheme="blue" onClick={onClickQuizStart}>クイズスタート</Button>
-                <Button colorScheme="green" onClick={onClickHikiyamaList}>曳山一覧</Button>
+                <div>
+                    <VStack 
+                        h={200} 
+                        justify='center'
+                        
+                    >
+                        <Button 
+                            colorScheme="blue" 
+                            onClick={onClickQuizStart}
+                            p='10'
+                            width='40'
+                        >
+                            クイズスタート
+                        </Button>
+                    </VStack>
+                    <VStack h={10} justify='center'>
+                        <Button
+                            colorScheme="green" 
+                            onClick={onClickHikiyamaList}
+                            p='10'
+                            width='40'
+                        >
+                            曳山達
+                        </Button>
+                    </VStack>
+                </div>
             </Center>
         </>
     )

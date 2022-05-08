@@ -1,4 +1,4 @@
-import { Button, Center, Stack, VStack } from "@chakra-ui/react";
+import { Button, Center, Stack, VStack, Text } from "@chakra-ui/react";
 import { memo, useEffect, useState, VFC } from "react";
 import { CorrectAnswer } from "../atoms/results/CorrectAnswer";
 import { FalseAnswer } from "../atoms/results/FalseAnswer";
@@ -7,13 +7,8 @@ import { PlaybackYoutube } from "../atoms/youtube/PlaybackYoutube";
 
 
 export const Quiz: VFC = memo(() => {
-    const onClickSubmitButton = () => {
-        console.log("submit")
-    };
-
     const questions = [
 		{
-			questionText: 'どの曳山でしょう',
             correct: "亀と浦島太郎",
             image: "",
             url: "https://www.youtube.com/watch?v=O082i6sfCRU",
@@ -25,7 +20,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
 		{
-			questionText: 'どの曳山でしょう?',
             correct: "鳳凰丸",
             image: "",
             url: "https://www.youtube.com/watch?v=EdSMDmgZXts",
@@ -37,7 +31,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
 		{
-			questionText: 'どの曳山でしょう?',
             correct: "武田信玄の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=43rRhvIYpRo",
@@ -49,7 +42,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
 		{
-			questionText: 'どの曳山でしょう?',
             correct: "青獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=blS7C5hxd4U",
@@ -61,7 +53,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "七宝丸",
             image: "",
             url: "https://www.youtube.com/watch?v=FacJYh2Ds5E",
@@ -73,7 +64,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "源義経の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=YaVOWuPLYK0",
@@ -85,7 +75,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "鯱",
             image: "",
             url: "https://www.youtube.com/watch?v=9R9DQtn9cYI&t=1s",
@@ -97,7 +86,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "珠取獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=QvrzMgqtNEU",
@@ -109,7 +97,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "金獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=SX-QSAnK0IM",
@@ -121,7 +108,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "上杉謙信の兜",
             image: "",
             url: "https://www.youtube.com/watch?v=eS18mHXnyPY",
@@ -133,7 +119,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "鯛山",
             image: "",
             url: "https://www.youtube.com/watch?v=MkCk2Pv8ybE",
@@ -145,7 +130,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "飛龍",
             image: "",
             url: "https://www.youtube.com/watch?v=fMq2ZIrLoPY",
@@ -157,7 +141,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
         {
-			questionText: 'どの曳山でしょう?',
             correct: "酒呑童子と源頼光",
             image: "",
             url: "https://www.youtube.com/watch?v=x3Lgv2gNPEk",
@@ -169,7 +152,6 @@ export const Quiz: VFC = memo(() => {
 			],
 		},
 		{
-			questionText: 'どの曳山でしょう?',
             correct: "赤獅子",
             image: "",
             url: "https://www.youtube.com/watch?v=x3Lgv2gNPEk",
@@ -186,28 +168,34 @@ export const Quiz: VFC = memo(() => {
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
 	const [resultAnswer, setResultAnswer] = useState<boolean | null>(null);
+	const [correctAnswerResult, setCorrectAnswerResult] = useState<String>("");
 
 	const handleAnswerOptionClick = (isCorrect: boolean) => {
 			if (isCorrect === true) 
 			{
-				setScore(score + 1);
 				setResultAnswer(true);
 			} else {
 				setResultAnswer(false);
+				const res = questions[currentQuestion].answerOptions.find(el => el.isCorrect === true);
+				const correctAnswerDisplay = res?.answerText.toString();
+				//setCorrectAnswerResult(correctAnswerDisplay);
 			}
-
-
 	};
 
 	const handleNextButtonClick = () => {
-		console.log("YES")
+		if (resultAnswer === true)
+		{
+			setScore(score + 1);
+		}
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true);
 		}
+		setResultAnswer(null);
 	}
+
     return (
         <>
 			<Center>
@@ -224,24 +212,26 @@ export const Quiz: VFC = memo(() => {
 									<span>Question {currentQuestion + 1}</span>/{questions.length}
 								</div>
 								</VStack>
-								<VStack h={40} justify='center'>
-									<div className='question-text'>
-										{questions[currentQuestion].questionText}
-									</div>
+								<VStack h={20}>
+									<Text fontSize='md'>どの曳山のお囃子でしょう</Text>
+									<Text fontSize='md' align='center'>「Play」ボタンを押すと曳山のお囃子が聞こえてくるよ</Text>
 								</VStack>
-								<VStack h={10} justify='center'>
-								{(() => {
-									if (resultAnswer === true) {
-										return <CorrectAnswer />
-									} else if (resultAnswer === false) {
-										return <FalseAnswer />
-									} else if (resultAnswer === null) {
-										return ;
-									}
-								})()}
+									<VStack h={20} marginTop='6'>
+									{(() => {
+										if (resultAnswer === true) {
+											return <CorrectAnswer />
+										} else if (resultAnswer === false) {
+											return <FalseAnswer />
+										} else if (resultAnswer === null) {
+											return ;
+										}
+									})()}
 								</VStack>
-								<VStack h={150} justify='center'>
+								<VStack h={100}>
 									<PlaybackYoutube url={questions[currentQuestion].url} />
+								</VStack>
+								<VStack marginTop={2}>
+									{/*不正解の場合、こちらに正解を表示させる機能を実装したい*/}
 								</VStack>
 							</div>
 							<div className='answer-section'>
@@ -256,9 +246,16 @@ export const Quiz: VFC = memo(() => {
 								))}
 								</Stack>
 							</div>
-							<div>
-								<Button onClick={() => handleNextButtonClick}>次へ</Button>
-							</div>
+							<VStack h={70} justify='center'>
+								<div>
+									<Button 
+										onClick={() => handleNextButtonClick()}
+										colorScheme='yellow'
+									>
+										次へ
+									</Button>
+								</div>
+							</VStack>
 						</>
 					)}
 				</div>

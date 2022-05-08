@@ -1,5 +1,5 @@
 import React, { memo, useCallback, VFC } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 
@@ -15,8 +15,8 @@ export const Header: VFC = memo(() => {
         bg="teal.500"
         color="gray.50"
         align="center"
-        justify="space-between"
-        padding={{ base: 3, md: 5 }}
+        justify="center"
+        padding={{ base: 4, md: 6 }}
       >
         <Flex
           align="center"
@@ -25,16 +25,9 @@ export const Header: VFC = memo(() => {
           _hover={{ cursor: "pointer" }}
           onClick={onClickHome}
         >
-          <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
-            唐津くんちのお囃子わかるかな
-          </Heading>
-        </Flex>
-        <Flex
-          align="center"
-          fontSize="sm"
-          display={{ base: "none", md: "flex" }}
-          flexGrow={2}
-        >
+          <Text fontSize={{ base: "sm", md: "23" }} >
+            唐津くんちのお囃子わかるかな(仮) ver 0.0.0
+          </Text>
         </Flex>
       </Flex>
     </>

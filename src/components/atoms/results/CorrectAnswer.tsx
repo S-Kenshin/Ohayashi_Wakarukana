@@ -4,7 +4,7 @@ import { memo, VFC } from 'react';
 export const CorrectAnswer: VFC = memo(() => {
     return (
         <>
-            <Button colorScheme="red">正解！！</Button>
+            <Button colorScheme="green">正解！！</Button>
         </>
     )
 })
