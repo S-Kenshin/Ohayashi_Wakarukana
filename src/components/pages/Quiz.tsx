@@ -214,7 +214,7 @@ export const Quiz: VFC = memo(() => {
 								</VStack>
 								<VStack h={20}>
 									<Text fontSize='md'>どの曳山のお囃子でしょう</Text>
-									<Text fontSize='md' align='center'>「Play」ボタンを押すと曳山のお囃子が聞こえてくるよ</Text>
+									<Text fontSize='md' align='center'>「Play」を押すと曳山のお囃子が聞こえてくるよ</Text>
 								</VStack>
 									<VStack h={20} marginTop='6'>
 									{(() => {
